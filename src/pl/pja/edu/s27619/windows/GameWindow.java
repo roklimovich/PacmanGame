@@ -14,20 +14,15 @@ public class GameWindow extends JFrame {
     private boolean ctrlPressed;
     private boolean shiftPressed;
     private boolean qPressed;
-    private int scoreCounter = 0;
     private int rows;
     private int columns;
-    private int currentRow = 0;
-    private int currentColumn = 0;
-    private JTable table;
-    private Pacman pacman;
 
     public GameWindow(int rows, int columns) {
         super("Game window");
         this.rows = rows;
         this.columns = columns;
         setLayout(new BorderLayout());
-        setSize(800, 800);
+        setSize(1200, 1200);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);

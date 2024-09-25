@@ -48,47 +48,34 @@ public class MainMenuWindow extends JFrame {
         buttonPanel.add(button2, BorderLayout.LINE_END);
         buttonPanel.add(button3, BorderLayout.PAGE_END);
 
-        button1.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String rows = JOptionPane.showInputDialog(button1,
-                        "Enter the size of your game board. \n Rows: ");
-                String columns = JOptionPane.showInputDialog(button1, "Columns: ");
-                if ((rows == null || rows.equals("")) && (columns == null || columns.equals(""))) {
-                    JOptionPane.showMessageDialog(button1,
-                            "Incorrect size of board. Please enter values from 10 to 100",
-                            "WARNING", JOptionPane.WARNING_MESSAGE);
+        button1.addActionListener(e -> {
+            String rows = JOptionPane.showInputDialog(button1,
+                    "Enter the size of your game board. \n Rows: ");
+            String columns = JOptionPane.showInputDialog(button1, "Columns: ");
+            if ((rows == null || rows.isEmpty()) && (columns == null || columns.isEmpty())) {
+                JOptionPane.showMessageDialog(button1,
+                        "Incorrect size of board. Please enter values from 10 to 30",
+                        "WARNING", JOptionPane.WARNING_MESSAGE);
+            } else {
+                int rowsToInteger = Integer.parseInt(rows);
+                int columnsToInteger = Integer.parseInt(columns);
+                if ((rowsToInteger >= 10 && rowsToInteger <= 30) &&
+                        (columnsToInteger >= 10 && columnsToInteger <= 30)) {
+                    new GameWindow(rowsToInteger, columnsToInteger);
+                    dispose();
                 } else {
-                    int rowsToInteger = Integer.parseInt(rows);
-                    int columnsToInteger = Integer.parseInt(columns);
-                    if ((rowsToInteger >= 10 && rowsToInteger <= 100) &&
-                            (columnsToInteger >= 10 && columnsToInteger <= 100)) {
-                        new GameWindow(rowsToInteger, columnsToInteger);
-                        dispose();
-                    } else {
-                        JOptionPane.showMessageDialog(button1, "Incorrect size of board.",
-                                "WARNING", JOptionPane.WARNING_MESSAGE);
+                    JOptionPane.showMessageDialog(button1, "Incorrect size of board.",
+                            "WARNING", JOptionPane.WARNING_MESSAGE);
 
-                    }
                 }
             }
         });
-        button2.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                new HighScoresWindow(new HighScoreManager());
-            }
-        });
+        button2.addActionListener(e -> new HighScoresWindow(new HighScoreManager()));
 
-        button3.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                dispose();
-            }
-        });
+        button3.addActionListener(e -> dispose());
 
         add(buttonPanel);
-        setSize(800, 800);
+        setSize(800, 700);
 //        setBackground(new Color(105, 105, 105));
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
